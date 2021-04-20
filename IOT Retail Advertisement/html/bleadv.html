@@ -31,9 +31,7 @@
         function getDeviceInfo() {
             let options = {
               //acceptAllDevices: true // Option to accept all devices
-               "filters": [{
-                   "name": deviceName
-                }]
+               "filters": [{"name":deviceName},{"name":deviceName1},{"name":deviceName2}]
             }
 
             console.log('Requesting Bluetooth Device...')
