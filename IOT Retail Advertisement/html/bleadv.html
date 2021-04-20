@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Advertising Scanner</title>
+</head>
+
+<body style="background-image: url('future.jpeg');">
+    <h1>Welcome to Smart Advertising Portal</h1>
+    <h2>Connect to the nearest store to recieve notifications!</h2>
+    <div class="ble-heading"></div>
+    <form>
+        <button>Connect with BLE device</button>
+    </form>
+
+    <script>
+        var deviceName = 'Nescafe'
+
+        function isWebBluetoothEnabled() {
+            if (!navigator.bluetooth) {
+                console.log('Web Bluetooth API is not available in this browser!')
+                return false
+            }
+
+            return true
+        }
+
+        function getDeviceInfo() {
+            let options = {
+              //acceptAllDevices: true // Option to accept all devices
+               "filters": [{
+                   "name": deviceName
+                }]
+            }
+
+            console.log('Requesting Bluetooth Device...')
+            navigator.bluetooth.requestDevice(options).then(device => {
+                console.log('> Name: ' + device.name)
+
+                if(device.name == 'HoD'){
+                  window.open('hod.html');
+                }
+
+                if(device.name == 'Nescafe'){
+                  window.open('nescafe.html');
+                }
+
+                if(device.name == 'JuiceCorner'){
+                  window.open('juice.html');
+                }
+
+            }).catch(error => {
+                console.log('Argh! ' + error)
+            })
+        }
+
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.stopPropagation()
+            event.preventDefault()
+
+            if (isWebBluetoothEnabled()) {
+                getDeviceInfo()
+            }
+        })
+    </script>
+</body>
+
+</html>
